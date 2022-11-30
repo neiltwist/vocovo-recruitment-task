@@ -32,11 +32,11 @@ for (let i = 0; i < 100; i++) {
   })
 }
 
-export function findById(id: number) {
+export function findApplianceById(id: number) {
   return appliances.find((thisAppliance) => thisAppliance.id === id)
 }
 
-export function createNew(fieldsToAdd: ApplianceUpdate): Appliance {
+export function createNewAppliance(fieldsToAdd: ApplianceUpdate): Appliance {
   const newId = appliances.length
   const newAppliance = {
     id: newId,
@@ -49,7 +49,7 @@ export function createNew(fieldsToAdd: ApplianceUpdate): Appliance {
   return newAppliance
 }
 
-export function update(
+export function updateAppliance(
   appliance: Appliance,
   fieldsToUpdate: ApplianceUpdate
 ): Appliance {
@@ -70,6 +70,13 @@ export function update(
 
   appliances[index] = appliance
   return appliance
+}
+
+export function deleteAppliance(applianceId: number) {
+  const index = appliances.findIndex(
+    (thisAppliance) => thisAppliance.id === applianceId
+  )
+  appliances.splice(index, 1)
 }
 
 export default appliances

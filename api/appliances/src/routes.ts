@@ -1,9 +1,10 @@
 import express, { Request, Response } from 'express'
 
 import applianceDB, {
-  createNew as createNewAppliance,
-  findById as findApplianceById,
-  update as updateAppliance,
+  createNewAppliance,
+  findApplianceById,
+  updateAppliance,
+  deleteAppliance,
 } from './db'
 
 const router = express.Router()
@@ -45,6 +46,20 @@ router.put('/:applianceId(\\d+)', (req: Request, res: Response) => {
   const updatedAppliance = updateAppliance(appliance, { name, type })
   const appliancePath = `${req.path}${updatedAppliance.id}`
   res.status(201).location(appliancePath).json(updatedAppliance)
+})
+
+//delete
+router.delete('/:applianceId(\\d+)', (req: Request, res: Response) => {
+  // id, name, type
+  const applianceId = parseInt(req.params.applianceId)
+  const appliance = findApplianceById(applianceId)
+  if (!appliance) {
+    res.status(404).json({ message: `appliance not found` })
+    return
+  }
+  deleteAppliance(appliance.id)
+
+  res.status(201).json({ message: 'deleted' })
 })
 
 export default router
