@@ -57,16 +57,12 @@ export function updateAppliance(
     (thisAppliance) => thisAppliance.id === appliance.id
   )
 
-  Object.keys(fieldsToUpdate)
-    .filter(
-      (key: string) =>
-        appliance.hasOwnProperty(key) &&
-        fieldsToUpdate[key] !== null &&
-        fieldsToUpdate[key] !== undefined
-    )
-    .forEach((key: string) => {
-      appliance[key] = fieldsToUpdate[key as keyof typeof fieldsToUpdate]
-    })
+  if (fieldsToUpdate.name) {
+    appliance.name = fieldsToUpdate.name
+  }
+  if (fieldsToUpdate.type) {
+    appliance.type = fieldsToUpdate.type
+  }
 
   appliances[index] = appliance
   return appliance
