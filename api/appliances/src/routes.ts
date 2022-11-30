@@ -59,7 +59,7 @@ router.delete('/:applianceId(\\d+)', (req: Request, res: Response) => {
   }
   deleteAppliance(appliance.id)
 
-  res.status(201).json({ message: 'deleted' })
+  res.status(204).json({ message: 'deleted' })
 })
 
 export default router
