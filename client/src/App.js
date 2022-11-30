@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import moment from 'moment'
 
-const APPLIANCES_LIST_URL = 'http://localhost:3000/appliances/list'
+const APPLIANCES_LIST_URL = 'http://localhost:8080/appliances/list'
 const DATE_FORMAT = 'YYYY-MM-DD HH:mm:ss'
 
 function Appliance({ id, name, type, createdAt }) {
