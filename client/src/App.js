@@ -1,5 +1,37 @@
+import { useEffect, useState } from 'react'
+import moment from 'moment'
+
+const APPLIANCES_LIST_URL = 'http://localhost:3000/appliances/list'
+const DATE_FORMAT = 'YYYY-MM-DD HH:mm:ss'
+
+function Appliance({ id, name, type, createdAt }) {
+  return (
+    <div key={id}>
+      name: {name}, type: {type}, created:{' '}
+      {moment(createdAt).format(DATE_FORMAT)}
+    </div>
+  )
+}
+
 function ApplianceList() {
-  return null
+  const [appliances, setAppliances] = useState([])
+  useEffect(() => {
+    fetch(APPLIANCES_LIST_URL)
+      .then((response) => {
+        console.log(response.status, response.headers.get('Location'))
+        return response.json()
+      })
+      .then(setAppliances)
+  }, [])
+  return (
+    <ul>
+      {appliances.map((appliance) => (
+        <li>
+          <Appliance {...appliance} />
+        </li>
+      ))}
+    </ul>
+  )
 }
 
 function App() {
