@@ -26,11 +26,8 @@ router.get('/:applianceId(\\d+)', (req: Request, res: Response) => {
 //create
 router.post('/', (req: Request, res: Response) => {
   // name, type
-  const {
-    applianceName,
-    applianceType,
-  }: { applianceName?: string; applianceType?: string } = req.body
-  const appliance = createNewAppliance()
+  const { name, type }: { name?: string; type?: string } = req.body
+  const appliance = createNewAppliance({ name, type })
   const appliancePath = `${req.path}${appliance.id}`
   res.status(201).location(appliancePath).json(appliance)
 })

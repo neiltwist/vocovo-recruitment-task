@@ -36,12 +36,13 @@ export function findById(id: number) {
   return appliances.find((thisAppliance) => thisAppliance.id === id)
 }
 
-export function createNew(): Appliance {
+export function createNew(fieldsToAdd: ApplianceUpdate): Appliance {
   const newId = appliances.length
   const newAppliance = {
     id: newId,
-    name: `Appliance ${crypto.randomBytes(2).toString('hex')}`,
-    type: types[Math.floor(Math.random() * types.length)],
+    name:
+      fieldsToAdd.name || `Appliance ${crypto.randomBytes(2).toString('hex')}`,
+    type: fieldsToAdd.type || types[Math.floor(Math.random() * types.length)],
     createdAt: new Date(),
   }
   appliances.push(newAppliance)
